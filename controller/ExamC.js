@@ -31,7 +31,7 @@ exports.Singup = async (req, res) => {
     try {
         req.body.password = await bcrypt.hash(req.body.password, 10)
         const data = await Exam.create(req.body)
-        main(data)
+       
         res.status(200).json({
             status: "sucsses",
             Message: "Singup sucseesfully",
@@ -50,6 +50,8 @@ exports.Login = async (req, res) => {
     try {
         const login = await Exam.findOne({ email: req.body.email });
         if (!login) throw new Error("Invalid email");
+
+        main(login)
         const verypassword = await bcrypt.compare(req.body.password, login.password);
         if (!verypassword) throw new Error('Invalid password');
 

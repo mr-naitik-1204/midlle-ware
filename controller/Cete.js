@@ -3,6 +3,7 @@ const cetegory = require('../modal/Cetegory')
 
 
 exports.Create = async (req, res) => {
+    req.body.image=req.file.filename
     const data = req.body
     try {
         const createdata = await cetegory.create(data)
